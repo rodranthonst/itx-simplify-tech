@@ -60,7 +60,12 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="py-20 bg-gray-50 relative">
+      {/* Test Website Banner */}
+      <div className="bg-yellow-400 text-black font-bold py-2 px-4 absolute top-0 left-0 right-0 text-center">
+        ⚠️ SITIO WEB DE PRUEBA ⚠️
+      </div>
+      
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 reveal">
           <h2 className="text-3xl lg:text-4xl font-bold text-itx-blue mb-4">Contacto</h2>
