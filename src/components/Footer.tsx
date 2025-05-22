@@ -55,14 +55,6 @@ const Footer = () => {
                 <span className="mr-2">📍</span>
                 <span>Montevideo, Uruguay</span>
               </li>
-              <li className="flex items-center">
-                <span className="mr-2">📞</span>
-                <span>+598 29008914</span>
-              </li>
-              <li className="flex items-center">
-                <span className="mr-2">✉️</span>
-                <span>info@itxuy.com</span>
-              </li>
             </ul>
           </div>
         </div>

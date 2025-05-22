@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,14 +7,56 @@ import { useToast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
   const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [submitting, setSubmitting] = useState(false);
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Mensaje enviado",
-      description: "Nos pondremos en contacto contigo a la brevedad.",
-      duration: 5000,
-    });
+    setSubmitting(true);
+    
+    try {
+      // Here we would normally send the data to a backend endpoint
+      // For demonstration purposes, we'll just simulate a successful submission
+      console.log(`Sending form data to admin@itxuy.com:`, formData);
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "Mensaje enviado",
+        description: "Nos pondremos en contacto contigo a la brevedad.",
+        duration: 5000,
+      });
+      
+      // Clear form
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "No se pudo enviar el mensaje. Inténtalo nuevamente.",
+        variant: "destructive",
+        duration: 5000,
+      });
+      console.error("Form submission error:", error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -41,6 +83,8 @@ const ContactSection = () => {
                     placeholder="Tu nombre" 
                     required
                     className="w-full"
+                    value={formData.name}
+                    onChange={handleChange}
                   />
                 </div>
                 <div>
@@ -53,6 +97,8 @@ const ContactSection = () => {
                     placeholder="tu@email.com" 
                     required
                     className="w-full" 
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -67,6 +113,8 @@ const ContactSection = () => {
                   rows={5} 
                   required
                   className="w-full"
+                  value={formData.message}
+                  onChange={handleChange}
                 />
               </div>
               
@@ -74,18 +122,15 @@ const ContactSection = () => {
                 type="submit"
                 className="w-full bg-gradient-to-r from-itx-blue to-itx-lightblue hover:from-itx-lightblue hover:to-itx-blue text-white font-medium py-2"
                 size="lg"
+                disabled={submitting}
               >
-                Enviar mensaje
+                {submitting ? 'Enviando...' : 'Enviar mensaje'}
               </Button>
             </form>
             
             <div className="mt-8 flex justify-center items-center space-x-6 text-gray-500">
-              <a href="mailto:info@itxuy.com" className="hover:text-itx-blue">
-                info@itxuy.com
-              </a>
-              <span>|</span>
-              <a href="tel:+598 29008914" className="hover:text-itx-blue">
-                +598 29008914
+              <a href="mailto:admin@itxuy.com" className="hover:text-itx-blue">
+                admin@itxuy.com
               </a>
             </div>
           </div>
