@@ -1,0 +1,98 @@
+
+import React from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+
+const ContactSection = () => {
+  const { toast } = useToast();
+  
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({
+      title: "Mensaje enviado",
+      description: "Nos pondremos en contacto contigo a la brevedad.",
+      duration: 5000,
+    });
+  };
+
+  return (
+    <section id="contact" className="py-20 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16 reveal">
+          <h2 className="text-3xl lg:text-4xl font-bold text-itx-blue mb-4">Contacto</h2>
+          <div className="w-20 h-1 bg-itx-accent mx-auto mb-4"></div>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            ¿Listo para hacer tu tecnología más efectiva? Escríbenos y te responderemos a la brevedad.
+          </p>
+        </div>
+
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-white p-8 rounded-lg shadow-lg reveal">
+            <form onSubmit={handleSubmit}>
+              <div className="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                    Nombre
+                  </label>
+                  <Input 
+                    id="name"
+                    placeholder="Tu nombre" 
+                    required
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email
+                  </label>
+                  <Input 
+                    id="email"
+                    type="email" 
+                    placeholder="tu@email.com" 
+                    required
+                    className="w-full" 
+                  />
+                </div>
+              </div>
+              
+              <div className="mb-6">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                  Mensaje
+                </label>
+                <Textarea 
+                  id="message"
+                  placeholder="¿Cómo podemos ayudarte?" 
+                  rows={5} 
+                  required
+                  className="w-full"
+                />
+              </div>
+              
+              <Button 
+                type="submit"
+                className="w-full bg-gradient-to-r from-itx-blue to-itx-lightblue hover:from-itx-lightblue hover:to-itx-blue text-white font-medium py-2"
+                size="lg"
+              >
+                Enviar mensaje
+              </Button>
+            </form>
+            
+            <div className="mt-8 flex justify-center items-center space-x-6 text-gray-500">
+              <a href="mailto:info@itxuy.com" className="hover:text-itx-blue">
+                info@itxuy.com
+              </a>
+              <span>|</span>
+              <a href="tel:+598 29008914" className="hover:text-itx-blue">
+                +598 29008914
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ContactSection;
